@@ -30,13 +30,17 @@ public class CrimeFragment extends Fragment {
 
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String DIALOG_DELETE = "DialogDelete";
 
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_DELETE = 2;
 
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
+
+    private boolean toDelete;
 
     DateFormat dateFormat = new DateFormat();
 
@@ -85,7 +89,7 @@ public class CrimeFragment extends Fragment {
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getFragmentManager();
+                FragmentManager manager = getActivity().getSupportFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
                 dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
@@ -114,13 +118,18 @@ public class CrimeFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_delete_crime:
-                Crime crime = mCrime;
-                CrimeLab.get(getActivity()).delCrime(crime);
-                getActivity().finish();
+                runDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void runDialog() {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        SureDeleteFragment sureDeleteFragment = new SureDeleteFragment();
+        sureDeleteFragment.setTargetFragment(CrimeFragment.this, REQUEST_DELETE);
+        sureDeleteFragment.show(manager, DIALOG_DELETE);
     }
 
     @Override
@@ -133,6 +142,15 @@ public class CrimeFragment extends Fragment {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
+        }
+
+        else if (requestCode == REQUEST_DELETE) {
+            toDelete = (boolean) data.getSerializableExtra(SureDeleteFragment.EXTRA_DELETE);
+            if (toDelete) {
+                Crime crime = mCrime;
+                CrimeLab.get(getActivity()).delCrime(crime);
+                getActivity().finish();
+            }
         }
     }
 

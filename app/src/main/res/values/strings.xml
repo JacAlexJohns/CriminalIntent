@@ -5,6 +5,7 @@
     <string name="crime_details_label">Details</string>
     <string name="crime_solved_label">Solved</string>
     <string name="date_picker_title">Date of crime:</string>
+    <string name="sure_delete_title">Are You Sure You Want to Delete This Crime?</string>
     <string name="new_crime">New Crime</string>
     <string name="del_crime">Delete Crime</string>
     <string name="show_subtitle">Show Subtitle</string>
