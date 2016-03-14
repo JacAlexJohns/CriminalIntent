@@ -10,4 +10,8 @@
         android:id="@+id/menu_item_show_subtitle"
         android:title="@string/show_subtitle"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menu_item_undo_delete"
+        android:title="@string/undo_del"
+        app:showAsAction="ifRoom"/>
 </menu>

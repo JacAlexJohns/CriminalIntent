@@ -1,5 +1,6 @@
 package com.bignerdranch.android.criminalintent;
 
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class CrimeListFragment extends Fragment {
 
     //private static final int REQUEST_CRIME = 1;
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
+    private static final String DIALOG_UNDO = "DialogUndo";
 
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
@@ -104,6 +106,9 @@ public class CrimeListFragment extends Fragment {
                 getActivity().invalidateOptionsMenu();
                 updateSubtitle();
                 return true;
+            case R.id.menu_item_undo_delete:
+                undoCrimeDelete();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -153,6 +158,18 @@ public class CrimeListFragment extends Fragment {
         CrimeLab.get(getActivity()).addCrime(crime);
         Intent intent = CrimePagerActivity.newIntent(getActivity(), crime.getID());
         startActivity(intent);
+    }
+
+    private void undoCrimeDelete() {
+        Crime crime = CrimeLab.get(getActivity()).undoDel();
+        if (crime != null) {
+            CrimeLab.get(getActivity()).addCrime(crime);
+            updateUI();
+        } else {
+            FragmentManager manager = getFragmentManager();
+            UndoButtonFragment dialog = new UndoButtonFragment();
+            dialog.show(manager, DIALOG_UNDO);
+        }
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

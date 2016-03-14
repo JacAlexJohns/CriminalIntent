@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.UUID;
 
 /**
@@ -11,6 +12,8 @@ import java.util.UUID;
  */
 public class CrimeLab {
     private static CrimeLab sCrimeLab;
+
+    private Stack<Crime> CRIME_STACK = new Stack<>();
 
     private List<Crime> mCrimes;
 
@@ -29,7 +32,18 @@ public class CrimeLab {
         mCrimes.add(c);
     }
 
-    public void delCrime(Crime c) { mCrimes.remove(c); }
+    public void delCrime(Crime c) {
+        CRIME_STACK.push(c);
+        mCrimes.remove(c);
+    }
+
+    public Crime undoDel() {
+        if (CRIME_STACK.size() < 1) {
+            return null;
+        }
+        Crime c = CRIME_STACK.pop();
+        return c;
+    }
 
     public List<Crime> getCrimes() {
         return mCrimes;

@@ -6,11 +6,13 @@
     <string name="crime_solved_label">Solved</string>
     <string name="date_picker_title">Date of crime:</string>
     <string name="sure_delete_title">Are You Sure You Want to Delete This Crime?</string>
+    <string name="undo_button_title">There Are No More Deletions to Undo</string>
     <string name="new_crime">New Crime</string>
     <string name="del_crime">Delete Crime</string>
     <string name="show_subtitle">Show Subtitle</string>
     <string name="hide_subtitle">Hide Subtitle</string>
     <string name="no_crimes">There are No Crimes</string>
+    <string name="undo_del">Undo Deletion</string>
     <string name="add_crime">Add a Crime</string>
     <plurals name="subtitle_format">
         <item quantity="one">%1$s crime</item>
