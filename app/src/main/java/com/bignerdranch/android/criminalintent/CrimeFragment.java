@@ -124,9 +124,9 @@ public class CrimeFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            /*case R.id.menu_item_delete_crime:
+            case R.id.menu_item_delete_crime:
                 runDialog();
-                return true;*/
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -151,14 +151,14 @@ public class CrimeFragment extends Fragment {
             updateDate();
         }
 
-        /*else if (requestCode == REQUEST_DELETE) {
+        else if (requestCode == REQUEST_DELETE) {
             toDelete = (boolean) data.getSerializableExtra(SureDeleteFragment.EXTRA_DELETE);
             if (toDelete) {
                 Crime crime = mCrime;
                 CrimeLab.get(getActivity()).delCrime(crime);
                 getActivity().finish();
             }
-        }*/
+        }
     }
 
     private void updateDate() {

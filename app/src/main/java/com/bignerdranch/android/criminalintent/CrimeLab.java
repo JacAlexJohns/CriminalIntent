@@ -46,11 +46,11 @@ public class CrimeLab {
         mDatabase.insert(CrimeTable.NAME, null, values);
     }
 
-    /*public void delCrime(Crime c) {
+    public void delCrime(Crime c) {
         Crime_Stack.push(c);
 
         mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ?", new String[] {String.valueOf(c.getID())});
-    }*/
+    }
 
     public void undoDel() {
         if (Crime_Stack.size() != 0) {
