@@ -124,9 +124,9 @@ public class CrimeFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_delete_crime:
+            /*case R.id.menu_item_delete_crime:
                 runDialog();
-                return true;
+                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -163,6 +163,7 @@ public class CrimeListFragment extends Fragment {
 
     private void undoCrimeDelete() {
         CrimeLab.get(getActivity()).undoDel();
+        updateUI();
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -183,6 +184,7 @@ public class CrimeListFragment extends Fragment {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     mCrime.setSolved(isChecked);
+                    CrimeLab.get(getActivity()).updateCrime(mCrime);
                 }
             });
         }

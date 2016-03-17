@@ -21,6 +21,7 @@ import static com.bignerdranch.android.criminalintent.database.CrimeDbSchema.*;
 public class CrimeLab {
     private static CrimeLab sCrimeLab;
 
+    private static final String DEL_ID = "_id";
     private Stack<Crime> Crime_Stack = new Stack<>();
 
     private Context mContext;
@@ -45,11 +46,11 @@ public class CrimeLab {
         mDatabase.insert(CrimeTable.NAME, null, values);
     }
 
-    public void delCrime(Crime c) {
+    /*public void delCrime(Crime c) {
         Crime_Stack.push(c);
 
-        mDatabase.delete(CrimeTable.NAME, null, null);
-    }
+        mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ?", new String[] {String.valueOf(c.getID())});
+    }*/
 
     public void undoDel() {
         if (Crime_Stack.size() != 0) {
@@ -76,7 +77,7 @@ public class CrimeLab {
 
     public Crime getCrime(UUID id) {
         CrimeCursorWrapper cursor = queryCrimes(
-                CrimeTable.Cols.UUID + " ?",
+                CrimeTable.Cols.UUID + " =?",
                 new String[] {id.toString()}
         );
 
