@@ -133,6 +133,7 @@ public class CrimeListFragment extends Fragment {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else {
+            mAdapter.setCrimes(crimes);
             mAdapter.notifyDataSetChanged();
         }
 
@@ -161,15 +162,7 @@ public class CrimeListFragment extends Fragment {
     }
 
     private void undoCrimeDelete() {
-        Crime crime = CrimeLab.get(getActivity()).undoDel();
-        if (crime != null) {
-            CrimeLab.get(getActivity()).addCrime(crime);
-            updateUI();
-        } else {
-            FragmentManager manager = getFragmentManager();
-            UndoButtonFragment dialog = new UndoButtonFragment();
-            dialog.show(manager, DIALOG_UNDO);
-        }
+        CrimeLab.get(getActivity()).undoDel();
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -241,6 +234,10 @@ public class CrimeListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mCrimes.size();
+        }
+
+        public void setCrimes(List<Crime> crimes) {
+            mCrimes = crimes;
         }
     }
 

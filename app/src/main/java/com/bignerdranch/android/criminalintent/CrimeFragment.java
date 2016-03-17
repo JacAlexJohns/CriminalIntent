@@ -62,6 +62,13 @@ public class CrimeFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+
+        CrimeLab.get(getActivity()).updateCrime(mCrime);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
 
@@ -144,14 +151,14 @@ public class CrimeFragment extends Fragment {
             updateDate();
         }
 
-        else if (requestCode == REQUEST_DELETE) {
+        /*else if (requestCode == REQUEST_DELETE) {
             toDelete = (boolean) data.getSerializableExtra(SureDeleteFragment.EXTRA_DELETE);
             if (toDelete) {
                 Crime crime = mCrime;
                 CrimeLab.get(getActivity()).delCrime(crime);
                 getActivity().finish();
             }
-        }
+        }*/
     }
 
     private void updateDate() {

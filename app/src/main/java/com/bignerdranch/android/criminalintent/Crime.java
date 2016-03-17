@@ -16,9 +16,13 @@ public class Crime {
     DateFormat dateFormat;
 
     public Crime() {
-        mID = UUID.randomUUID();
-        mDate = new Date();
+        this(UUID.randomUUID());
         dateFormat = new DateFormat();
+    }
+
+    public Crime(UUID id) {
+        mID = id;
+        mDate = new Date();
     }
 
     public UUID getID() {
