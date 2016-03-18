@@ -49,7 +49,7 @@ public class CrimeLab {
     public void delCrime(Crime c) {
         Crime_Stack.push(c);
 
-        mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ?", new String[] {String.valueOf(c.getID())});
+        mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ?", new String[]{String.valueOf(c.getID())});
     }
 
     public void undoDel() {
@@ -107,6 +107,7 @@ public class CrimeLab {
         values.put(CrimeTable.Cols.TITLE, crime.getTitle());
         values.put(CrimeTable.Cols.DATE, crime.getDate().getTime());
         values.put(CrimeTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
+        values.put(CrimeTable.Cols.SUSPECT, crime.getSuspect());
 
         return values;
     }
