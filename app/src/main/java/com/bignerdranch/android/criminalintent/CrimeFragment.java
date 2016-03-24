@@ -224,9 +224,6 @@ public class CrimeFragment extends Fragment {
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                mPhotoSize = new Point();
-                mPhotoSize.set(mPhotoView.getWidth(), mPhotoView.getHeight());
-
                 updatePhotoView();
                 mPhotoView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
@@ -351,8 +348,8 @@ public class CrimeFragment extends Fragment {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mPhotoView.setImageDrawable(null);
         } else {
-            Bitmap bitmap = (mPhotoSize == null)? PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity()) :
-                    PictureUtils.getScaledBitmap(mPhotoFile.getPath(), mPhotoSize.x, mPhotoSize.y);
+            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(),
+                    mPhotoView.getWidth(), mPhotoView.getHeight());
             mPhotoView.setImageBitmap(bitmap);
         }
     }
