@@ -70,4 +70,8 @@ public class Crime {
     public void setSuspectID(Long suspectID) {
         this.suspectID = suspectID;
     }
+
+    public String getPhotoFilename() {
+        return "IMG_" + getID().toString() + ".jpg";
+    }
 }
