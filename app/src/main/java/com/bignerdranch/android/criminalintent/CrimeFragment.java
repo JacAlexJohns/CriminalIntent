@@ -41,6 +41,7 @@ public class CrimeFragment extends Fragment {
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_DELETE = "DialogDelete";
+    private static final String DIALOG_IMAGE = "DialogImage";
 
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_DELETE = 2;
@@ -164,7 +165,7 @@ public class CrimeFragment extends Fragment {
                 PackageManager.MATCH_DEFAULT_ONLY) == null) {
             mSuspectButton.setEnabled(false);
         }
-        
+
         mPhoneButton = (Button) v.findViewById(R.id.crime_phone);
         mPhoneButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -217,6 +218,16 @@ public class CrimeFragment extends Fragment {
         });
         mPhotoView = (ImageView) v.findViewById(R.id.crime_photo);
         updatePhotoView();
+        mPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mPhotoFile != null && mPhotoFile.exists()) {
+                    FragmentManager manager = getActivity().getSupportFragmentManager();
+                    PictureFragment dialog = PictureFragment.newInstance(mPhotoFile);
+                    dialog.show(manager, DIALOG_IMAGE);
+                }
+            }
+        });
 
         return v;
     }
